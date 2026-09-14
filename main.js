@@ -8,6 +8,20 @@ let currTile;
 let otherTile;
 
 window.onload = () => {
+    const music = document.getElementById("bgMusic");
+
+    // Попытка запустить сразу (сработает редко)
+    music.volume = 0.3;
+    music.play().catch(err => console.log("Автоплей заблокирован:", err));
+
+    // Запуск при первом клике где угодно на странице
+    document.addEventListener("click", () => {
+        if (music.paused) {
+            music.play();
+        }
+    }, { once: true });
+    //  ↑ once: true — обработчик сработает только один раз и удалится сам
+
     startGame();
 
     window.setInterval(function () {
